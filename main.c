@@ -4,7 +4,7 @@
 int main(void)
 {
 
-	imprime();
+
 	return 0;
 }
 
