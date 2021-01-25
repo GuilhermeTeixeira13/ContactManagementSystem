@@ -18,13 +18,13 @@ int main(void)
 	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
 	addContactToList(contacts, listSize);
 
-	gravaTXT(contacts, "contacts.txt");
+	saveTXT(contacts, "contacts.txt");
 
 	listSize = listSizeFinder(contacts);
 	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
 	addContactToList(contacts, listSize);
 
-	gravaTXT(contacts, "contacts.txt");
+	saveTXT(contacts, "contacts.txt");
 
 	printList(contacts);
 
