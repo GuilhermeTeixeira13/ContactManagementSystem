@@ -2,14 +2,14 @@
 
 typedef struct
 {
-	char name[20];
-	char gender[15];
-	char adress[25];
+	char name[40];
+	char gender[40];
+	char adress[40];
 	char notes[200];
 }CONTACT;
 
 CONTACT creatContact();
-void addContactToList(CONTACT *contactList);
+void addContactToList(CONTACT *contactList, int listSize);
 void printList(CONTACT *contactList);
 void linha();
 void limpaInput();

@@ -5,11 +5,23 @@
 int main(void)
 {
 	CONTACT *contacts;
+	int listSize;
 
-	contacts = (CONTACT*)malloc(1*sizeof(CONTACT));
+	contacts = (CONTACT*)malloc(sizeof(CONTACT));
+	if(contacts==NULL)
+	{
+		fprintf(stderr, "Failed to allocate memory.\n");
+		exit(EXIT_FAILURE);
+	}
 
-	addContactToList(contacts);
-	addContactToList(contacts);
+	listSize = listSizeFinder(contacts);
+	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
+	addContactToList(contacts, listSize);
+
+	listSize = listSizeFinder(contacts);
+	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
+	addContactToList(contacts, listSize);
+
 	printList(contacts);
 
 	free(contacts);
