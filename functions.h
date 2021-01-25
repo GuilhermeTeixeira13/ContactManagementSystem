@@ -13,4 +13,5 @@ void addContactToList(CONTACT *contactList, int listSize);
 void printList(CONTACT *contactList);
 void linha();
 void limpaInput();
+void gravaTXT(CONTACT *contacts, char *fileName);
 int listSizeFinder(CONTACT *contactlist);

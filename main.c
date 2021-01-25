@@ -8,11 +8,7 @@ int main(void)
 	int listSize;
 
 	contacts = (CONTACT*)malloc(sizeof(CONTACT));
-	if(contacts==NULL)
-	{
-		fprintf(stderr, "Failed to allocate memory.\n");
-		exit(EXIT_FAILURE);
-	}
+	
 
 	listSize = listSizeFinder(contacts);
 	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
@@ -21,6 +17,14 @@ int main(void)
 	listSize = listSizeFinder(contacts);
 	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
 	addContactToList(contacts, listSize);
+
+	gravaTXT(contacts, "contacts.txt");
+
+	listSize = listSizeFinder(contacts);
+	contacts = (CONTACT*)realloc(contacts, (sizeof(CONTACT))*(listSize+1));
+	addContactToList(contacts, listSize);
+
+	gravaTXT(contacts, "contacts.txt");
 
 	printList(contacts);
 
