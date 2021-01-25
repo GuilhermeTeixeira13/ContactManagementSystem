@@ -15,3 +15,5 @@ void linha();
 void limpaInput();
 void saveTXT(CONTACT *contacts, char *fileName);
 int listSizeFinder(CONTACT *contactlist);
+void readTXT(CONTACT *contacts, char *fileName);
+int sumContactsInFile(char *fileName);

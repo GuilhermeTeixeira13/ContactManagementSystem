@@ -37,20 +37,42 @@ void closeFile(FILE *f, char *fnome)
 
 void saveTXT(CONTACT *contacts, char *fileName)
 {
-    FILE *file = openFile(fileName, "w");
+    FILE *file = openFile(fileName, "r+w");
 
-    for(int i=0; strlen(contacts[i].name) != 0; i++)
+    for(int i=0; strlen(contacts[i].name) > 0; i++)
     {
-        fprintf(file, "NAME:%sGENDER:%sADRESS:%sNOTES:%s\n", contacts[i].name, contacts[i].gender, contacts[i].adress, contacts[i].notes);
+        fprintf(file, "NAME:%s|GENDER:%s|ADRESS:%s|NOTES:%s|\n", contacts[i].name, contacts[i].gender, contacts[i].adress, contacts[i].notes);
     }
 
     closeFile(file, fileName);
 }
 
-/*void readTXT(CONTACT *contacts, char *fileName)
+int sumContactsInFile(char *fileName)
 {
+    char frase[256];
+    int linhas = 0;
 
-}*/
+    FILE *file = openFile(fileName, "r");
+
+    while(fgets(frase, 256, file) != NULL)
+        linhas++;
+
+    return linhas;
+}
+
+void readTXT(CONTACT *contacts, char *fileName)
+{
+    FILE *file = openFile(fileName, "r");
+
+    int i = 0;
+
+    while(fscanf(file,"NAME:%[^|]|GENDER:%[^|]|ADRESS:%[^|]|NOTES:%[^|]|\n", contacts[i].name, contacts[i].gender, contacts[i].adress, contacts[i].notes) == 4)
+    {
+        i++;
+    }
+
+    closeFile(file, fileName);
+}
 
 
 CONTACT creatContact()
@@ -59,14 +81,23 @@ CONTACT creatContact()
 
     printf("NAME: ");
     fgets(contact.name, 40, stdin);
+    char *pos1 = strchr(contact.name,'\n');
+    *pos1 = '\0';
+
     printf("GENDER: ");
     fgets(contact.gender, 40, stdin);
-    printf("%s", contact.gender);
+    char *pos2 = strchr(contact.gender,'\n');
+    *pos2 = '\0';
+
     printf("ADRESS: ");
     fgets(contact.adress, 40, stdin);
-    printf("%s", contact.adress);
+    char *pos3 = strchr(contact.adress,'\n');
+    *pos3 = '\0';
+
     printf("EXTRA NOTES: ");
     fgets(contact.notes, 200, stdin);
+    char *pos4 = strchr(contact.notes,'\n');
+    *pos4 = '\0';
 
     return contact;
 }
@@ -93,8 +124,6 @@ void addContactToList(CONTACT *contactList, int listSize)
     strcpy(contactList[addPos].gender, contact.gender);
     strcpy(contactList[addPos].adress, contact.adress);
     strcpy(contactList[addPos].notes, contact.notes);
-
-
 }
 
 void printList(CONTACT *contactList)
@@ -106,9 +135,9 @@ void printList(CONTACT *contactList)
     for(index=0; index<listSize; index++)
     {
         linha();
-        printf("%s", contactList[index].name);
-        printf("%s", contactList[index].gender);
-        printf("%s", contactList[index].adress);
-        printf("%s", contactList[index].notes);
+        printf("%s\n", contactList[index].name);
+        printf("%s\n", contactList[index].gender);
+        printf("%s\n", contactList[index].adress);
+        printf("%s\n", contactList[index].notes);
     }
 }
