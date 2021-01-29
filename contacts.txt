@@ -1,2 +1,1 @@
-NAME:gui|GENDER:m|ADRESS:e|NOTES:r|
-NAME:ana|GENDER:y|ADRESS:u|NOTES:i|
+
