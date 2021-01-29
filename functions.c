@@ -2,6 +2,7 @@
 #include"functions.h"
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 
 void limpaInput()
 {
@@ -37,9 +38,11 @@ void closeFile(FILE *f, char *fnome)
 
 void saveTXT(CONTACT *contacts, char *fileName)
 {
-    FILE *file = openFile(fileName, "r+w");
+    FILE *file = openFile(fileName, "r+");
+    
+    int listSize = listSizeFinder(contacts);
 
-    for(int i=0; strlen(contacts[i].name) > 0; i++)
+    for(int i=0; i<listSize && strlen(contacts[i].name) > 0; i++)
     {
         fprintf(file, "NAME:%s|GENDER:%s|ADRESS:%s|NOTES:%s|\n", contacts[i].name, contacts[i].gender, contacts[i].adress, contacts[i].notes);
     }
@@ -141,3 +144,80 @@ void printList(CONTACT *contactList)
         printf("%s\n", contactList[index].notes);
     }
 }
+
+void minuscula(char *original, char *final)
+{
+    int i;
+    for(i=0; original[i] != '\0'; i++)
+        final[i] = tolower(original[i]);
+    final[i] = '\0';
+}
+
+int returnsPositionsToRemove(char *name, CONTACT *contacts)
+{
+    int i = 0, res = -1;
+    char listName[40], nameToRemove[40];
+
+    int listSize = listSizeFinder(contacts);
+    
+
+    while(i < listSize && strlen(contacts[i].name) > 0)
+    {
+        minuscula(contacts[i].name, listName);
+        minuscula(name, nameToRemove);
+        if(strcmp(listName, nameToRemove) == 0)
+        {
+            res = i;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
+
+int removeContact(char *name, CONTACT *contacts)
+{
+    int i, ret = 0;
+
+    int listSize = listSizeFinder(contacts);
+
+    i = returnsPositionsToRemove(name, contacts);
+
+    if(i>=0)
+    {
+        while(i<listSize && strlen(contacts[i].name)>0)
+        {
+            contacts[i] = contacts[i+1];
+            i++;
+        }
+        CONTACT contact = {};
+        contacts[i] = contact;
+        ret = 0;
+    }
+    else
+    {
+        ret = 1;
+    }
+    return ret;  
+}
+
+void removeContactIO(CONTACT *contacts)
+{
+    int option;
+    char ContactName[40];
+    char *pos;
+
+    
+    printf("Contact NAME to be removed: ");
+    fgets(ContactName, 40, stdin);
+    pos = strchr(ContactName, '\n');
+    *pos = '\0';
+
+    if(removeContact(ContactName, contacts) == 1)
+        printf(" This contact doesn't exist.\n");
+    else
+        printf(" %s has been sucessfly removed.\n", ContactName); 
+    printf("\n");
+    limpaInput(); 
+}
+    

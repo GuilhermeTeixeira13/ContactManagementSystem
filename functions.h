@@ -17,3 +17,8 @@ void saveTXT(CONTACT *contacts, char *fileName);
 int listSizeFinder(CONTACT *contactlist);
 void readTXT(CONTACT *contacts, char *fileName);
 int sumContactsInFile(char *fileName);
+int returnsPositionsToRemove(char *name, CONTACT *contacts);
+void minuscula(char *original, char *final);
+int removeContact(char *name, CONTACT *contacts);
+void removeContactIO(CONTACT *contacts);
+

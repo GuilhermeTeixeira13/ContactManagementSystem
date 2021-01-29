@@ -25,6 +25,16 @@ int main(void)
 
 	printList(contacts);
 
+	/*removeContactIO(contacts);
+	printList(contacts);
+
+	listSize = listSizeFinder(contacts);
+	printf("Tamanho da lista atual --> %d", listSize);
+	
+
+	saveTXT(contacts, "contacts.txt");*/
+	
+
 	free(contacts);
 	contacts = NULL;
 
