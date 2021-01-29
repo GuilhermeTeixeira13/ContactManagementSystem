@@ -9,22 +9,9 @@ typedef struct contact
 	struct contact *next;
 }CONTACT;
 
-/*
-CONTACT creatContact();
-void addContactToList(CONTACT *contactList, int listSize);
-void printList(CONTACT *contactList);
-void saveTXT(CONTACT *contacts, char *fileName);
-int listSizeFinder(CONTACT *contactlist);
-void readTXT(CONTACT *contacts, char *fileName);
-int sumContactsInFile(char *fileName);
-int returnsPositionsToRemove(char *name, CONTACT *contacts);
-void minuscula(char *original, char *final);
-void removeContactIO(CONTACT *contacts);*/
-
-
 void linha();
 void limpaInput();
-void inicializeHead(CONTACT **contact);
+void inicialize(CONTACT **contact);
 CONTACT *createContact(char *name, char *gender, char *adress, char *notes);
 int addContact(CONTACT **head, char *name, char *gender, char *adress, char *notes);
 void listContacts(CONTACT *head);

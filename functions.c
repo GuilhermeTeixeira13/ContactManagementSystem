@@ -53,7 +53,7 @@ void saveTXT(CONTACT **head, char *fileName)
     closeFile(file, fileName);
 }
 
-void inicializeHead(CONTACT **contact)
+void inicialize(CONTACT **contact)
 {
     *contact = NULL;
 }

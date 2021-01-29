@@ -5,8 +5,7 @@
 
 int main()
 {
-
-    int op=1, res=0;
+	int op=1, res=0;
 
 	char name[40];
 	char gender[40];
@@ -14,7 +13,33 @@ int main()
 	char notes[200];
 
     CONTACT *head;
-    inicializeHead(&head);
+    inicialize(&head);
+
+	CONTACT *current;
+	inicialize(&current);
+
+	FILE *file;
+    char line[128];
+
+	file = openFile("contacts.txt", "r");
+
+    while(fscanf(file, "NAME:%[^|]|GENDER:%[^|]|ADRESS:%[^|]|NOTES:%[^|]|\n", name, gender, adress, notes) == 4)
+	{
+        CONTACT *contact = malloc(sizeof(CONTACT));
+
+		strcpy(contact->name, name);
+		strcpy(contact->gender, gender);
+		strcpy(contact->adress, adress);
+		strcpy(contact->notes, notes);
+
+        contact->next =NULL;
+
+        if(head == NULL)
+            current = head = contact;   
+		else 
+            current = current->next = contact;
+    }
+	closeFile(file, "contacts.txt");
 
     while (op != 0)
     {
