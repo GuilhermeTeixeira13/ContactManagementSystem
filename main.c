@@ -1,3 +1,11 @@
+/**
+ * @file      "main.c"
+ * @brief     This is the main file of the project called "Contact Management System". Was used mainly the C source code (Linked Lists, Strings, Functions, etc).
+ * @details	  As the name suggests, in this project you can easily add, remove and list contacts and keep them updated in a txt file("contacts.txt").
+ * @author    Guilherme Teixeira
+ * @version   1.0.
+*/
+
 #include<stdio.h>
 #include"functions.h"
 #include<stdlib.h>
@@ -24,9 +32,10 @@ int main()
 	FILE *file;
     char line[128];
 
+	/* ↓   Open the file and save, in a linked list, all the contacts in it   ↓ */
 	file = openFile("contacts.txt", "r");
 
-    while(fscanf(file, "NAME:%[^|]|GENDER:%[^|]|ADRESS:%[^|]|NOTES:%[^|]|\n", name, gender, adress, notes) == 4)
+    while(fscanf(file, "NAME:%[^|]|GENDER:%[^|]|ADRESS:%[^|]|NOTES:%[^|]|\n", name, gender, adress, notes) == 4) // Keep looping until fail to read a full contact
 	{
         CONTACT *contact = malloc(sizeof(CONTACT));
 
@@ -37,23 +46,17 @@ int main()
 
         contact->next =NULL;
 
-        if(head == NULL)
+        if(head == NULL) // If doens't exist any contact in "contacts.txt"
             current = head = contact;   
 		else 
-            current = current->next = contact;
+            current = current->next = contact; // Travel to the next contact
     }
 	closeFile(file, "contacts.txt");
 
     while (op != 0)
     {
-		linha();
-		printf("*\t\t    CONTACT MANAGEMENT SYSTEM                  *\n");
-        linha();
-        printf("\n1 - ADD CONTACT\n");
-        printf("2 - DELETE CONTACT\n");
-        printf("3 - SHOW CONTACTS\n");
-        printf("\n0 - LEAVE\n");
-		printf("\n↳ OPTION > ");
+		intro();
+		/* ↓   Ask user for an option   ↓ */
         while (scanf("%d", &op) != 1) 
         {
             cleanInput();
@@ -61,7 +64,7 @@ int main()
         }
 		while(op>3 ||op<0)
 		{
-			printf("That option isn't avaiable, please pick other --> ");
+			printf("That option isn't avaiable, please pick other one --> ");
 			scanf("%d", &op);
 		}
         switch (op)
@@ -74,6 +77,7 @@ int main()
 			do
 			{
 				cleanInput();
+				/* ↓   Asks user for NAME, GENDER, ADRESS and NOTES of the contact that he is adding   ↓ */
 				do
 				{
 					printf("▹ NAME: ");
@@ -86,7 +90,6 @@ int main()
 						printf(" - Error! The contact needs a name.\n");
 					}
 				} while(strcmp(name, "\0") == 0);
-				
 
 				printf("▹ GENDER: ");
 				fgets(gender, 40, stdin);
@@ -107,13 +110,14 @@ int main()
 					printf("\n✘ Failed to add contact.\n");
 				else
 					printf("\n✔ Contact has been added.\n");
-				saveTXT(&head, "contacts.txt");
+
+				saveTXT(&head, "contacts.txt"); // Save all the changes in "contacts.txt"
 
 				printf("\nWrite 'q'/'quit' to leave or press any other key to continue: ");
 				scanf("%s", insideOption);
 				if(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0)
 					linha();
-			} while(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0);
+			} while(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0); // Asks user if he wants to keep adding contacts
 			cleanConsole();
             break;
         case 2:
@@ -121,10 +125,12 @@ int main()
 			linha();
 			printf("*\t\t\t DELETE CONTACT                        *\n");
 			linha();
+
 			do
 			{
 				cleanInput();
 				printf("Contact NAME to be removed ✂  ");
+
 				fgets(name, 40, stdin);
 				char *pos5 = strchr(name,'\n');
 				*pos5 = '\0';
@@ -136,13 +142,15 @@ int main()
 				if(res == 1)
 				{
 					printf("\n✔  Contact has been sucessfly removed.\n");
-					saveTXT(&head, "contacts.txt");
+					saveTXT(&head, "contacts.txt"); // Save all the changes in "contacts.txt"
 				}
+
 				printf("\nWrite 'q'/'quit' to leave or press any other key to continue: ");
 				scanf("%s", insideOption);
 				if(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0)
 					linha();
-			} while(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0);
+			} while(strcmp(insideOption, "q") != 0 && strcmp(insideOption, "quit") != 0); // Asks the user if he wants to keep removing contacts
+
 			cleanConsole();
             break;
         case 3:
@@ -159,7 +167,6 @@ int main()
             break;
         }
     }
-
     return 0;
 }
 

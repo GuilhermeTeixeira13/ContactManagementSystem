@@ -1,3 +1,10 @@
+/**
+ * @file      "functions.c"
+ * @brief     This file contains all the functions needed to the correct behavior of the program.
+ * @author    Guilherme Teixeira
+ * @version   1.0.
+*/
+
 #include<stdio.h>
 #include"functions.h"
 #include<stdlib.h>
@@ -5,21 +12,33 @@
 #include<ctype.h>
 #include <unistd.h>
 
+/**
+ * This function just clears the buffer to avoid "garbage" in stdin.
+*/
 void cleanInput()
 {
     while (getchar() != '\n');
 }
 
+/**
+ * This function clears the terminal. With her, the appearance of the program looks clean.
+*/
 void cleanConsole()
 {
     system("clear");
 }
 
+/**
+ * This function helps in "front-end" stuff.
+*/
 void linha()
 {
     printf("----------------------------------------------------------------\n");
 }
 
+/**
+ * This function helps in "front-end" stuff. Appears when the user decides to leave the program.
+*/
 void leaving()
 {
     printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
@@ -27,24 +46,54 @@ void leaving()
   	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
-FILE *openFile(char *fnome, char *modo) 
+/**
+ * This function helps in "front-end" stuff. Shows the available options that the user has.
+*/
+void intro()
 {
-    FILE *f = fopen(fnome, modo);
+    linha();
+	printf("*\t\t    CONTACT MANAGEMENT SYSTEM                  *\n");
+    linha();
+    printf("\n1 - ADD CONTACT\n");
+    printf("2 - DELETE CONTACT\n");
+    printf("3 - SHOW CONTACTS\n");
+    printf("\n0 - LEAVE\n");
+	printf("\n↳ OPTION > ");
+}
+
+/**
+ * Simple function that opens a file.
+ * 
+ * @param char *fname - Name of the file that we want to open.
+ * @param char *mode - The mode that will be used when the file is opened.
+ * 
+ * @return a file of type FILE.
+*/
+FILE *openFile(char *fname, char *mode) 
+{
+    FILE *f = fopen(fname, mode);
 
     if (f == NULL)
     {
-        fprintf(stderr, "Failed to open %s.\n", fnome);
+        fprintf(stderr, "Failed to open %s.\n", fname);
         exit(EXIT_FAILURE);
     }
 
     return f;
 }
 
-void closeFile(FILE *f, char *fnome)
+/**
+ * Simple function that closes a file.
+ * 
+ * @param FILE *f - The file that we want to be closed.
+ * @param char *fname - The name of the file that we want to be closed.
+
+*/
+void closeFile(FILE *f, char *fname)
 {
     if (fclose(f) == EOF)
     {
-        fprintf(stderr, "Failed to close %s.\n", fnome);
+        fprintf(stderr, "Failed to close %s.\n", fname);
         exit(EXIT_FAILURE);
     }
 }
