@@ -10,11 +10,13 @@ typedef struct contact
 }CONTACT;
 
 void linha();
-void limpaInput();
+void cleanInput();
+void cleanConsole();
+void leaving();
 void inicialize(CONTACT **contact);
 CONTACT *createContact(char *name, char *gender, char *adress, char *notes);
 int addContact(CONTACT **head, char *name, char *gender, char *adress, char *notes);
-void listContacts(CONTACT *head);
+void listContacts(CONTACT **head);
 int removeContact(CONTACT **head, char *name);
 void saveTXT(CONTACT **head, char *fileName);
 FILE *openFile(char *fnome, char *modo);

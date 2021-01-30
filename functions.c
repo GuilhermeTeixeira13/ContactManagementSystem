@@ -3,15 +3,28 @@
 #include<stdlib.h>
 #include<string.h>
 #include<ctype.h>
+#include <unistd.h>
 
-void limpaInput()
+void cleanInput()
 {
     while (getchar() != '\n');
 }
 
+void cleanConsole()
+{
+    system("clear");
+}
+
 void linha()
 {
-    printf("____________________________________________\n");
+    printf("----------------------------------------------------------------\n");
+}
+
+void leaving()
+{
+    printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+  	printf("┃ *\t\t>  THANKS FOR USING THIS PROGRAM  <          * ┃\n");
+  	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
 FILE *openFile(char *fnome, char *modo) 
@@ -100,31 +113,85 @@ int addContact(CONTACT **head, char *name, char *gender, char *adress, char *not
     return 0;
 }
 
-void listContacts(CONTACT *head)
+void listContacts(CONTACT **head)
 {
+    int i = 0, out=0, valid;
+    char decison[12];
+    char *pos;
 
-    CONTACT *temp = head;
-    if (head == NULL)
-        printf("Empty list.\n");
-    
+    CONTACT *temp = *head;
+
+    if (*head == NULL)
+    {
+        printf("\t\t     ☛    Empty list    ☚\n"); 
+        sleep(2);
+    }
     else
     {
-        while (temp != NULL)
+        while (temp != NULL && out != 1)
         {
-            linha();
-            printf("%s\n", temp->name);
-            printf("%s\n", temp->gender);
-            printf("%s\n", temp->adress);
-            printf("%s\n", temp->notes);
+            printf("\n▹ NAME: %s\n", temp->name);
+            printf("▹ GENDER: %s\n", temp->gender);
+            printf("▹ ADRESS: %s\n", temp->adress);
+            printf("▹ NOTES: %s\n\n", temp->notes);
 
             temp = temp->next;
+            
+            if ((i + 1) % 5 == 0)
+            {
+                valid=0;
+                printf("- Press ENTER to see the next five or 'q'/'quit' to leave --> ");
+                fgets(decison, 257, stdin);
+                pos = strchr(decison, '\n');
+                *pos = '\0';
+
+                if(strcmp(decison, "q") == 0 || strcmp(decison, "quit") == 0)
+                    out = 1;
+                else if(decison[0] == '\0')
+                    out = 0;
+                else
+                {
+                    while(valid != 1)
+                    {
+                        printf(" ✘  Invalid option! Press ENTER to see the next five or 'q'/'quit' to leave --> ");
+
+                        fgets(decison, 257, stdin);
+                        pos = strchr(decison, '\n');
+                        *pos = '\0';
+
+                        if(strcmp(decison, "q") == 0 || strcmp(decison, "quit") == 0)
+                        {
+                            out = 1;
+                            valid = 1;
+                        }
+                        else if(decison[0] == '\0')
+                        {
+                            out = 0;
+                            valid = 1;
+                        }
+                        else
+                            valid = 0; 
+                    }
+                }
+                printf("\n");
+            }
+            
+            if ((i + 1) % 5 != 0)
+                linha(); 
+            else
+                printf("****************************************************************\n"); 
+            i++;    
         }
+        if((i+1)<5)
+        {
+            printf("  You will be redirected to the main page in about 5 seconds.\n");
+            sleep(5);
+        }        
     }
 }
 
 int removeContact(CONTACT **head, char *name)
 {
-
     CONTACT *temp = *head;
     CONTACT *remove = NULL;
     int res = 0;

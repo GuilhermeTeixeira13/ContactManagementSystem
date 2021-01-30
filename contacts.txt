@@ -1,1 +1,2 @@
-NAME:teste|GENDER:w|ADRESS:e|NOTES:r|
+NAME:Raquel Moreira|GENDER:Faminino|ADRESS:País das Maravilhas|NOTES:Sou linda.|
+NAME:Guilherme Teixeira|GENDER:Masculino|ADRESS:Farrapos Country|NOTES:Sou feio.|
