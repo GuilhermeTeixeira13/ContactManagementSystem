@@ -123,8 +123,9 @@ void listContacts(CONTACT **head)
 
     if (*head == NULL)
     {
-        printf("\t\t     ☛    Empty list    ☚\n"); 
-        sleep(2);
+        printf("\t\t     ☛    Empty list    ☚\n");
+        printf("  You will be redirected to the main page in about 5 seconds.\n"); 
+        sleep(5);
     }
     else
     {
