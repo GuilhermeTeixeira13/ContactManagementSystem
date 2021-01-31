@@ -1,0 +1,230 @@
+\hypertarget{functions_8c}{}\doxysection{functions.\+c File Reference}
+\label{functions_8c}\index{functions.c@{functions.c}}
+
+
+This file contains all the functions needed to the correct behavior of the program.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}functions.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for functions.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{functions_8c_a150201b909faf8a8c09f97a613974728}{clean\+Input}} ()
+\item 
+void \mbox{\hyperlink{functions_8c_ab319f92f61072f8a469f17f63c46f103}{clean\+Console}} ()
+\item 
+void \mbox{\hyperlink{functions_8c_afae552abc65e1babf29418ac1f584f92}{linha}} ()
+\item 
+void \mbox{\hyperlink{functions_8c_a1dbf84ab20b141e5edada4d1e120461f}{leaving}} ()
+\item 
+void \mbox{\hyperlink{functions_8c_a36ad170338d7feb540a9ce2f1f8bb1b0}{intro}} ()
+\item 
+F\+I\+LE $\ast$ \mbox{\hyperlink{functions_8c_ab4ec4e9862ee13f7957d6b2bf8405771}{open\+File}} (char $\ast$fname, char $\ast$mode)
+\item 
+void \mbox{\hyperlink{functions_8c_a4ef558ed9b76e1cb2b83d20bcaa6f940}{close\+File}} (F\+I\+LE $\ast$f, char $\ast$fname)
+\item 
+void \mbox{\hyperlink{functions_8c_ae705f49cc625689936ab0a62d3f5890a}{save\+T\+XT}} (\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$head, char $\ast$file\+Name)
+\item 
+void \mbox{\hyperlink{functions_8c_abf14c13eee2905f58c66617297da02f6}{inicialize}} (\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$\mbox{\hyperlink{structcontact}{contact}})
+\item 
+\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$ \mbox{\hyperlink{functions_8c_a70cf52e8e0c912996f18fdc430400699}{create\+Contact}} (char $\ast$name, char $\ast$gender, char $\ast$adress, char $\ast$notes)
+\item 
+int \mbox{\hyperlink{functions_8c_a844284158ee628533927b0fc6ebee787}{add\+Contact}} (\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$head, char $\ast$name, char $\ast$gender, char $\ast$adress, char $\ast$notes)
+\item 
+void \mbox{\hyperlink{functions_8c_a79fb5d05b18cbd55df8a274d65f3aba9}{list\+Contacts}} (\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$head)
+\item 
+int \mbox{\hyperlink{functions_8c_a242122280941f7441a9d94e2f09328f7}{remove\+Contact}} (\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$head, char $\ast$name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all the functions needed to the correct behavior of the program. 
+
+\begin{DoxyAuthor}{Author}
+Guilherme Teixeira 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0. 
+\end{DoxyVersion}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{functions_8c_a844284158ee628533927b0fc6ebee787}\label{functions_8c_a844284158ee628533927b0fc6ebee787}} 
+\index{functions.c@{functions.c}!addContact@{addContact}}
+\index{addContact@{addContact}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{addContact()}{addContact()}}
+{\footnotesize\ttfamily int add\+Contact (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$}]{head,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{gender,  }\item[{char $\ast$}]{adress,  }\item[{char $\ast$}]{notes }\end{DoxyParamCaption})}
+
+This function adds a new contact to a Linked List made of contacts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em C\+O\+N\+T\+A\+CT} & $\ast$$\ast$head -\/ The beggining of the Linked List made of Contacts. \\
+\hline
+{\em char} & $\ast$name -\/ Name of the Contact. \\
+\hline
+{\em char} & $\ast$gender -\/ Gender of the person. \\
+\hline
+{\em char} & $\ast$adress -\/ Adress of the person. \\
+\hline
+{\em char} & $\ast$notes -\/ Extra Notes to add to the contact.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 If memory allocation failed. 
+
+0 If everything worked perfect. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{functions_8c_ab319f92f61072f8a469f17f63c46f103}\label{functions_8c_ab319f92f61072f8a469f17f63c46f103}} 
+\index{functions.c@{functions.c}!cleanConsole@{cleanConsole}}
+\index{cleanConsole@{cleanConsole}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{cleanConsole()}{cleanConsole()}}
+{\footnotesize\ttfamily void clean\+Console (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function clears the terminal. With her, the appearance of the program looks clean. \mbox{\Hypertarget{functions_8c_a150201b909faf8a8c09f97a613974728}\label{functions_8c_a150201b909faf8a8c09f97a613974728}} 
+\index{functions.c@{functions.c}!cleanInput@{cleanInput}}
+\index{cleanInput@{cleanInput}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{cleanInput()}{cleanInput()}}
+{\footnotesize\ttfamily void clean\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function just clears the buffer to avoid \char`\"{}garbage\char`\"{} in stdin. \mbox{\Hypertarget{functions_8c_a4ef558ed9b76e1cb2b83d20bcaa6f940}\label{functions_8c_a4ef558ed9b76e1cb2b83d20bcaa6f940}} 
+\index{functions.c@{functions.c}!closeFile@{closeFile}}
+\index{closeFile@{closeFile}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{closeFile()}{closeFile()}}
+{\footnotesize\ttfamily void close\+File (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{f,  }\item[{char $\ast$}]{fname }\end{DoxyParamCaption})}
+
+Simple function that closes a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em F\+I\+LE} & $\ast$f -\/ The file that we want to be closed. \\
+\hline
+{\em char} & $\ast$fname -\/ The name of the file that we want to be closed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a70cf52e8e0c912996f18fdc430400699}\label{functions_8c_a70cf52e8e0c912996f18fdc430400699}} 
+\index{functions.c@{functions.c}!createContact@{createContact}}
+\index{createContact@{createContact}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{createContact()}{createContact()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}}$\ast$ create\+Contact (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{gender,  }\item[{char $\ast$}]{adress,  }\item[{char $\ast$}]{notes }\end{DoxyParamCaption})}
+
+This function creates a contact.
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & $\ast$name -\/ Name of the Contact. \\
+\hline
+{\em char} & $\ast$gender -\/ Gender of the person. \\
+\hline
+{\em char} & $\ast$adress -\/ Adress of the person. \\
+\hline
+{\em char} & $\ast$notes -\/ Extra Notes to add to the contact.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contact created. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{functions_8c_abf14c13eee2905f58c66617297da02f6}\label{functions_8c_abf14c13eee2905f58c66617297da02f6}} 
+\index{functions.c@{functions.c}!inicialize@{inicialize}}
+\index{inicialize@{inicialize}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{inicialize()}{inicialize()}}
+{\footnotesize\ttfamily void inicialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$}]{contact }\end{DoxyParamCaption})}
+
+This function inicialize the head of some linked List made of Contacts, with N\+U\+LL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em C\+O\+N\+T\+A\+CT} & $\ast$$\ast$contact -\/ Linked List made of contacts. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a36ad170338d7feb540a9ce2f1f8bb1b0}\label{functions_8c_a36ad170338d7feb540a9ce2f1f8bb1b0}} 
+\index{functions.c@{functions.c}!intro@{intro}}
+\index{intro@{intro}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{intro()}{intro()}}
+{\footnotesize\ttfamily void intro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function helps in \char`\"{}front-\/end\char`\"{} stuff. Shows the available options that the user has. \mbox{\Hypertarget{functions_8c_a1dbf84ab20b141e5edada4d1e120461f}\label{functions_8c_a1dbf84ab20b141e5edada4d1e120461f}} 
+\index{functions.c@{functions.c}!leaving@{leaving}}
+\index{leaving@{leaving}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{leaving()}{leaving()}}
+{\footnotesize\ttfamily void leaving (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function helps in \char`\"{}front-\/end\char`\"{} stuff. Appears when the user decides to leave the program. \mbox{\Hypertarget{functions_8c_afae552abc65e1babf29418ac1f584f92}\label{functions_8c_afae552abc65e1babf29418ac1f584f92}} 
+\index{functions.c@{functions.c}!linha@{linha}}
+\index{linha@{linha}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{linha()}{linha()}}
+{\footnotesize\ttfamily void linha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function helps in \char`\"{}front-\/end\char`\"{} stuff. \mbox{\Hypertarget{functions_8c_a79fb5d05b18cbd55df8a274d65f3aba9}\label{functions_8c_a79fb5d05b18cbd55df8a274d65f3aba9}} 
+\index{functions.c@{functions.c}!listContacts@{listContacts}}
+\index{listContacts@{listContacts}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{listContacts()}{listContacts()}}
+{\footnotesize\ttfamily void list\+Contacts (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$}]{head }\end{DoxyParamCaption})}
+
+This functions lists all the contacts in a Linked List. It allows the user to stop or keep listing every 5 contacts shown.
+
+
+\begin{DoxyParams}{Parameters}
+{\em C\+O\+N\+T\+A\+CT} & $\ast$$\ast$head -\/ The beggining of the Linked List made of Contacts. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_ab4ec4e9862ee13f7957d6b2bf8405771}\label{functions_8c_ab4ec4e9862ee13f7957d6b2bf8405771}} 
+\index{functions.c@{functions.c}!openFile@{openFile}}
+\index{openFile@{openFile}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{openFile()}{openFile()}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ open\+File (\begin{DoxyParamCaption}\item[{char $\ast$}]{fname,  }\item[{char $\ast$}]{mode }\end{DoxyParamCaption})}
+
+Simple function that opens a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & $\ast$fname -\/ Name of the file that we want to open. \\
+\hline
+{\em char} & $\ast$mode -\/ The mode that will be used when the file is opened.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a file of type F\+I\+LE. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{functions_8c_a242122280941f7441a9d94e2f09328f7}\label{functions_8c_a242122280941f7441a9d94e2f09328f7}} 
+\index{functions.c@{functions.c}!removeContact@{removeContact}}
+\index{removeContact@{removeContact}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{removeContact()}{removeContact()}}
+{\footnotesize\ttfamily int remove\+Contact (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$}]{head,  }\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+This functions removes a Contact with the pretended name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em C\+O\+N\+T\+A\+CT} & $\ast$$\ast$head -\/ The beggining of the Linked List made of Contacts. \\
+\hline
+{\em char} & $\ast$name -\/ Name of the Contact.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 If the contact name doesn\textquotesingle{}t exists. 
+
+0 If everything worked perfect. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{functions_8c_ae705f49cc625689936ab0a62d3f5890a}\label{functions_8c_ae705f49cc625689936ab0a62d3f5890a}} 
+\index{functions.c@{functions.c}!saveTXT@{saveTXT}}
+\index{saveTXT@{saveTXT}!functions.c@{functions.c}}
+\doxysubsubsection{\texorpdfstring{saveTXT()}{saveTXT()}}
+{\footnotesize\ttfamily void save\+T\+XT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcontact}{C\+O\+N\+T\+A\+CT}} $\ast$$\ast$}]{head,  }\item[{char $\ast$}]{file\+Name }\end{DoxyParamCaption})}
+
+This function saves all the contacts/changes in the pretended text file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em C\+O\+N\+T\+A\+CT} & $\ast$$\ast$head -\/ The beggining of some Linked List made of contacts. \\
+\hline
+{\em char} & $\ast$file\+Name -\/ The name of the file that we want to be closed. \\
+\hline
+\end{DoxyParams}

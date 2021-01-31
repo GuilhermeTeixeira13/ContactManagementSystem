@@ -98,6 +98,13 @@ void closeFile(FILE *f, char *fname)
     }
 }
 
+/**
+ * This function saves all the contacts/changes in the pretended text file.
+ * 
+ * @param CONTACT **head - The beggining of some Linked List made of contacts.
+ * @param char *fileName - The name of the file that we want to be closed.
+
+*/
 void saveTXT(CONTACT **head, char *fileName)
 {
     FILE *file = openFile(fileName, "w+");
@@ -115,11 +122,26 @@ void saveTXT(CONTACT **head, char *fileName)
     closeFile(file, fileName);
 }
 
+/**
+ * This function inicialize the head of some linked List made of Contacts, with NULL.
+ * 
+ * @param CONTACT **contact - Linked List made of contacts.
+*/
 void inicialize(CONTACT **contact)
 {
     *contact = NULL;
 }
 
+/**
+ * This function creates a contact.
+ * 
+ * @param char *name - Name of the Contact.
+ * @param char *gender - Gender of the person.
+ * @param char *adress - Adress of the person.
+ * @param char *notes - Extra Notes to add to the contact.
+ * 
+ * @return The contact created.
+*/
 CONTACT *createContact(char *name, char *gender, char *adress, char *notes)
 {
 
@@ -134,6 +156,19 @@ CONTACT *createContact(char *name, char *gender, char *adress, char *notes)
     return contact;
 }
 
+
+/**
+ * This function adds a new contact to a Linked List made of contacts.
+ * 
+ * @param CONTACT **head - The beggining of the Linked List made of Contacts.
+ * @param char *name - Name of the Contact.
+ * @param char *gender - Gender of the person.
+ * @param char *adress - Adress of the person.
+ * @param char *notes - Extra Notes to add to the contact.
+ * 
+ * @return -1 If memory allocation failed.
+ * @return 0 If everything worked perfect.
+*/
 int addContact(CONTACT **head, char *name, char *gender, char *adress, char *notes)
 {
 
@@ -162,6 +197,13 @@ int addContact(CONTACT **head, char *name, char *gender, char *adress, char *not
     return 0;
 }
 
+/**
+ *  This functions lists all the contacts in a Linked List.
+ * It allows the user to stop or keep listing every 5 contacts shown.
+ * 
+ * @param CONTACT **head - The beggining of the Linked List made of Contacts.
+ * 
+*/
 void listContacts(CONTACT **head)
 {
     int i = 0, out=0, valid;
@@ -240,6 +282,17 @@ void listContacts(CONTACT **head)
     }
 }
 
+
+/**
+ *  This functions removes a Contact with the pretended name.
+ * 
+ * @param CONTACT **head - The beggining of the Linked List made of Contacts.
+ * @param char *name - Name of the Contact.
+ * 
+ * @return -1 If the contact name doesn't exists.
+ * @return 0 If everything worked perfect.
+ * 
+*/
 int removeContact(CONTACT **head, char *name)
 {
     CONTACT *temp = *head;
